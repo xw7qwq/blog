@@ -1,4 +1,4 @@
-/** Run with Node 22: node --experimental-strip-types --test scripts/test-macflare.mjs */
+/** Run with Node 24: node --experimental-strip-types --test scripts/test-macflare.mjs */
 import assert from "node:assert/strict";
 import test from "node:test";
 import { compactArtworkUrl } from "../src/utils/macflare-images.ts";
