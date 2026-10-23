@@ -5,6 +5,11 @@ export const LIGHT_MODE = "light",
 	AUTO_MODE = "auto";
 export const DEFAULT_THEME = AUTO_MODE;
 
+// The theme hue before the xw7 pink became the default. The display settings
+// panel used to store the current hue on every page load, so a stored value of
+// 250 means "never chosen" and is dropped in favour of the configured default.
+export const LEGACY_DEFAULT_HUE = 250;
+
 // Banner height unit: vh
 export const BANNER_HEIGHT = 35;
 export const BANNER_HEIGHT_EXTEND = 30;

@@ -16,7 +16,7 @@ export const siteConfig: SiteConfig = {
 	subtitle: "",
 	lang: "zh_CN", // Legacy fallback; page language comes from the /zh/ or /en/ route.
 	themeColor: {
-		hue: 250, // Default hue for the theme color, from 0 to 360. e.g. red: 0, teal: 200, cyan: 250, pink: 345
+		hue: 354, // xw7 brand pink (#b4527f), shared with the lucius7.dev panel. From 0 to 360, e.g. red: 0, teal: 200, cyan: 250
 		fixed: false, // Hide the theme color picker for visitors
 	},
 	banner: {
