@@ -6,7 +6,7 @@ See the [writing guide](WRITING.md) for posts and images, and the [LaTeX guide](
 
 ## Install the development environment
 
-Install Git and Node.js 22 (at least 22.12), then the project's required pnpm 9.14.4:
+Install Git and Node.js 24, then the project's required pnpm 9.14.4:
 
 ```sh
 node --version
@@ -18,7 +18,7 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-With nvm, run `nvm install` and `nvm use` in the repository before installing pnpm and dependencies. `.nvmrc` selects Node.js 22; `engines` and `packageManager` in `package.json` specify the detailed requirements. Do not clone the repository again inside an existing working copy.
+With nvm, run `nvm install` and `nvm use` in the repository before installing pnpm and dependencies. `.nvmrc` selects Node.js 24; `engines` and `packageManager` in `package.json` specify the detailed requirements. Do not clone the repository again inside an existing working copy.
 
 Open the terminal's URL, normally `http://localhost:4321/`. Development mode includes drafts. Press `Ctrl+C` to stop. If the port is occupied, use the actual port shown or run `pnpm dev --port 4322`.
 
@@ -89,7 +89,7 @@ git pull --ff-only
 
 ## Automatic deployment
 
-CI uses Node.js 22, the pinned pnpm version, and the lockfile, then runs `pnpm lint`, `pnpm check`, `pnpm test:i18n`, `pnpm test:macflare`, `pnpm test:ojflare`, and `pnpm build`. Merging a validated PR into `main` triggers another full check and build, uploads the output, and deploys it to GitHub Pages. Deployment does not reuse Astro's content cache, preventing deleted posts from reappearing.
+CI uses Node.js 24, the pinned pnpm version, and the lockfile, then runs `pnpm lint`, `pnpm check`, `pnpm test:i18n`, `pnpm test:macflare`, `pnpm test:ojflare`, and `pnpm build`. Merging a validated PR into `main` triggers another full check and build, uploads the output, and deploys it to GitHub Pages. Deployment does not reuse Astro's content cache, preventing deleted posts from reappearing.
 
 In [Settings → Pages](https://github.com/xw7qwq/nfuwari/settings/pages), the source should be **GitHub Actions** and the custom domain should be `blog.lucius7.cn`. Commit source files only; no separate `gh-pages` branch is needed.
 
@@ -114,7 +114,7 @@ Requests follow this path: browser → Alibaba Cloud ESA → GitHub Pages. After
 | Symptom | Action |
 | --- | --- |
 | `node` or `pnpm` is missing | Check Node.js installation; with nvm, run `nvm use` before installing the required pnpm version |
-| Unsupported Node.js version | Use Node.js 22.12 or a later 22.x release; do not substitute another major version |
+| Unsupported Node.js version | Use a Node.js 24.x release; do not substitute another major version |
 | Frozen lockfile installation fails | Sync the repository and confirm `package.json` and the lockfile belong to the same commit; dependency changes must update both |
 | Local build passes but CI fails | Inspect the failing step, especially filename case, uncommitted images, and environment versions |
 | Push is rejected | Check GitHub authentication and write access; sync and resolve conflicts instead of overwriting remote changes with force-push |

@@ -32,7 +32,7 @@ ESA provides HTTPS for the public site. The GitHub Pages origin certificate has 
 
 ## First run
 
-Install Git, **Node.js 22 (at least 22.12)**, and **pnpm 9.14.4**:
+Install Git, **Node.js 24**, and **pnpm 9.14.4**:
 
 ```sh
 git clone https://github.com/xw7qwq/nfuwari.git

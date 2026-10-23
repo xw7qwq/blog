@@ -33,7 +33,7 @@ body:
     attributes:
       label: Environment
       description: For page issues, include your device, OS, and browser. For build issues, include Node.js and pnpm versions.
-      placeholder: iPhone / iOS / Safari, or macOS / Node.js 22 / pnpm 9.14.4
+      placeholder: iPhone / iOS / Safari, or macOS / Node.js 24 / pnpm 9.14.4
   - type: textarea
     id: context
     attributes:
