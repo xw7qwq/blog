@@ -37,6 +37,7 @@
     "@iconify/svelte": "^4.2.0",
     "@swup/astro": "^1.8.0",
     "@tailwindcss/typography": "^0.5.20",
+    "@xw7/ui": "github:xw7qwq/ui#v0.1.0",
     "astro": "5.18.2",
     "astro-expressive-code": "^0.44.2",
     "astro-icon": "^1.2.0",
@@ -81,7 +82,7 @@
   "homepage": "https://blog.lucius7.cn/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/xw7qwq/nfuwari.git"
+    "url": "https://github.com/xw7qwq/blog.git"
   },
   "engines": {
     "node": ">=24 <25"

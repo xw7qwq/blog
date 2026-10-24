@@ -59,6 +59,9 @@ importers:
       '@tailwindcss/typography':
         specifier: ^0.5.20
         version: 0.5.20(tailwindcss@3.4.19(yaml@2.9.1))
+      '@xw7/ui':
+        specifier: github:xw7qwq/ui#v0.1.0
+        version: https://codeload.github.com/xw7qwq/ui/tar.gz/56d28e86fc241d3cc22b18eaca4ed2094d3bca48(svelte@5.57.1)
       astro:
         specifier: 5.18.2
         version: 5.18.2(@types/node@26.5.0)(jiti@1.21.7)(rollup@2.80.0)(stylus@0.64.0)(terser@5.51.2)(typescript@5.9.3)(yaml@2.9.1)
@@ -1941,6 +1944,13 @@ packages:
 
   '@vscode/l10n@0.0.18':
     resolution: {integrity: sha512-KYSIHVmslkaCDyw013pphY+d7x1qV8IZupYfeIfzNA+nsaWHbn5uPuQRvdRFsa9zFzGeudPuoGoZ1Op4jrJXIQ==}
+
+  '@xw7/ui@https://codeload.github.com/xw7qwq/ui/tar.gz/56d28e86fc241d3cc22b18eaca4ed2094d3bca48':
+    resolution: {tarball: https://codeload.github.com/xw7qwq/ui/tar.gz/56d28e86fc241d3cc22b18eaca4ed2094d3bca48}
+    version: 0.1.0
+    engines: {node: '>=24'}
+    peerDependencies:
+      svelte: ^5.0.0
 
   acorn@8.18.0:
     resolution: {integrity: sha512-lGq+9yr1/GuAWaVYIHRjvvySG5/4VfKIvC8EWxStPdcDh/Ka7FG3twP6v4d5BkravUilhIAsG4Qj83t02LWUPQ==}
@@ -6976,6 +6986,10 @@ snapshots:
       vscode-uri: 3.2.0
 
   '@vscode/l10n@0.0.18': {}
+
+  '@xw7/ui@https://codeload.github.com/xw7qwq/ui/tar.gz/56d28e86fc241d3cc22b18eaca4ed2094d3bca48(svelte@5.57.1)':
+    dependencies:
+      svelte: 5.57.1
 
   acorn@8.18.0: {}
 

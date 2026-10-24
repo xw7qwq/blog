@@ -1,4 +1,6 @@
 ---
+import Logo from "@xw7/ui/components/Logo.svelte";
+import { SITES } from "@xw7/ui/nav";
 import { Icon } from "astro-icon/components";
 import { getLocaleFromPath, type Locale } from "@/i18n/locales";
 import { macFlareConfig, navBarConfig, siteConfig } from "../config";
@@ -38,12 +40,13 @@ let links: NavBarLink[] = navBarConfig.links.map(
         <div class="flex min-w-0 items-center gap-1">
         <a href={localeUrl(locale)} class="btn-plain scale-animation rounded-lg h-[3.25rem] min-w-0 px-1 sm:px-3 font-bold active:scale-95">
             <div class="flex min-w-0 flex-row text-[var(--primary)] items-center text-md">
-                <Icon name="material-symbols:home-outline-rounded" class="hidden sm:block shrink-0 text-[1.75rem] mb-1 mr-2" />
+                <span class="xw7-blog-logo hidden sm:block mr-2"><Logo size={24} /></span>
                 <span class="truncate">{siteConfig.title}</span>
             </div>
         </a>
         {macFlareConfig.enable && <MacFlare client:load locale={locale} baseUrl={macFlareConfig.baseUrl} />}
         </div>
+        <a href={SITES.panel} class="btn-plain scale-animation rounded-lg h-11 px-3 font-bold shrink-0">{locale === "en" ? "Panel" : "面板"}</a>
         <div class="hidden lg:flex shrink-0">
             {links.map((l) => {
                 return <a aria-label={l.name} href={l.external ? l.url : localeUrl(locale, l.url)} target={l.external ? "_blank" : null}
@@ -75,6 +78,11 @@ let links: NavBarLink[] = navBarConfig.links.map(
 </div>
 
 <style>
+    .xw7-blog-logo {
+        --accent: var(--primary);
+        --text: var(--primary);
+        --surface: var(--card-bg);
+    }
     @media (max-width: 639px) {
         .navbar-controls :global(#search-switch),
         .navbar-controls :global(#scheme-switch),

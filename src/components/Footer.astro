@@ -1,4 +1,5 @@
 ---
+import { SITES } from "@xw7/ui/nav";
 import { getLocaleFromPath } from "@/i18n/locales";
 
 import { profileConfig } from "../config";
@@ -16,6 +17,7 @@ const locale = getLocaleFromPath(Astro.url.pathname);
         &copy; <span id="copyright-year">{currentYear}</span> {profileConfig.name}. {locale === "en" ? "All rights reserved." : "保留所有权利。"} /
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href={localeUrl(locale, '/rss.xml')}>RSS</a> /
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('sitemap-index.xml')}>{locale === "en" ? "Sitemap" : "站点地图"}</a><br>
+        <a class="transition link text-[var(--primary)] font-medium" href={SITES.panel}>{locale === "en" ? "xw7 Panel" : "xw7 面板"}</a> ·
         Powered by
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a> &
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a>
