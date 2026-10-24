@@ -16,4 +16,4 @@
 
 <!-- Include desktop or mobile screenshots for interface changes. Describe compatibility and validation for dependency upgrades. Remove this section if unnecessary. -->
 
-See [CONTRIBUTING.md](https://github.com/xw7qwq/nfuwari/blob/main/CONTRIBUTING.md) for maintenance conventions.
+See [CONTRIBUTING.md](https://github.com/xw7qwq/blog/blob/main/CONTRIBUTING.md) for maintenance conventions.

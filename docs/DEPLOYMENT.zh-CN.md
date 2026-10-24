@@ -1,6 +1,6 @@
 # 本地运行与部署
 
-网站：[blog.lucius7.cn](https://blog.lucius7.cn/) · 源码：[xw7qwq/nfuwari](https://github.com/xw7qwq/nfuwari)
+网站：[blog.lucius7.cn](https://blog.lucius7.cn/) · 源码：[xw7qwq/blog](https://github.com/xw7qwq/blog)
 
 文章格式与图片说明见 [写作指南](WRITING.zh-CN.md)，数学公式见 [LaTeX 指南](LATEX.zh-CN.md)。
 
@@ -12,8 +12,8 @@
 node --version
 npm install -g pnpm@9.14.4
 pnpm --version
-git clone https://github.com/xw7qwq/nfuwari.git
-cd nfuwari
+git clone https://github.com/xw7qwq/blog.git
+cd blog
 pnpm install --frozen-lockfile
 pnpm dev
 ```
@@ -76,9 +76,9 @@ git push -u origin post/my-first-post
 
 ### 5. 合并 PR 并检查线上
 
-打开 [仓库 Pull Requests](https://github.com/xw7qwq/nfuwari/pulls)，创建写作分支到 `main` 的 PR，说明修改和验证结果。确认 CI 通过后合并。分支推送和 PR 创建不会直接更新线上站点；合并到 `main` 才触发发布。
+打开 [仓库 Pull Requests](https://github.com/xw7qwq/blog/pulls)，创建写作分支到 `main` 的 PR，说明修改和验证结果。确认 CI 通过后合并。分支推送和 PR 创建不会直接更新线上站点；合并到 `main` 才触发发布。
 
-在 [Deploy to GitHub Pages](https://github.com/xw7qwq/nfuwari/actions/workflows/deploy.yml) 查看当前提交的运行结果。成功后打开 [网站](https://blog.lucius7.cn/) 检查受影响页面。工作流也支持在 Actions 页面手动运行。
+在 [Deploy to GitHub Pages](https://github.com/xw7qwq/blog/actions/workflows/deploy.yml) 查看当前提交的运行结果。成功后打开 [网站](https://blog.lucius7.cn/) 检查受影响页面。工作流也支持在 Actions 页面手动运行。
 
 完成后，在本地同步合并后的主线：
 
@@ -91,7 +91,7 @@ git pull --ff-only
 
 CI 使用 Node.js 24、指定版本的 pnpm 与锁文件，依次执行 `pnpm lint`、`pnpm check`、`pnpm test:i18n`、`pnpm build`。PR 检查通过后，合并到 `main` 会触发发布工作流：再次检查并完整构建，上传构建产物，再部署到 GitHub Pages。发布不复用 Astro 内容缓存，以免删除文章后仍生成旧内容。
 
-在 [Settings → Pages](https://github.com/xw7qwq/nfuwari/settings/pages) 中，发布来源应为 **GitHub Actions**，Custom domain 为 `blog.lucius7.cn`。只需要提交源码，GitHub Pages 不需要单独维护 `gh-pages` 分支。
+在 [Settings → Pages](https://github.com/xw7qwq/blog/settings/pages) 中，发布来源应为 **GitHub Actions**，Custom domain 为 `blog.lucius7.cn`。只需要提交源码，GitHub Pages 不需要单独维护 `gh-pages` 分支。
 
 ## 域名与 HTTPS
 
