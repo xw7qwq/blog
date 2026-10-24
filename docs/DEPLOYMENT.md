@@ -1,6 +1,6 @@
 # Local development and deployment
 
-Website: [blog.lucius7.cn](https://blog.lucius7.cn/) · Source: [xw7qwq/nfuwari](https://github.com/xw7qwq/nfuwari)
+Website: [blog.lucius7.cn](https://blog.lucius7.cn/) · Source: [xw7qwq/blog](https://github.com/xw7qwq/blog)
 
 See the [writing guide](WRITING.md) for posts and images, and the [LaTeX guide](LATEX.md) for math.
 
@@ -12,8 +12,8 @@ Install Git and Node.js 24, then the project's required pnpm 9.14.4:
 node --version
 npm install -g pnpm@9.14.4
 pnpm --version
-git clone https://github.com/xw7qwq/nfuwari.git
-cd nfuwari
+git clone https://github.com/xw7qwq/blog.git
+cd blog
 pnpm install --frozen-lockfile
 pnpm dev
 ```
@@ -76,9 +76,9 @@ For a post directory, stage that directory, for example `git add src/content/pos
 
 ### 5. Merge the PR and check the live site
 
-Open a PR from the writing branch to `main` in [Pull Requests](https://github.com/xw7qwq/nfuwari/pulls), explain the change and validation, and wait for CI to pass before merging. Pushing a branch or opening a PR does not update the live site; merging into `main` triggers deployment.
+Open a PR from the writing branch to `main` in [Pull Requests](https://github.com/xw7qwq/blog/pulls), explain the change and validation, and wait for CI to pass before merging. Pushing a branch or opening a PR does not update the live site; merging into `main` triggers deployment.
 
-Check the current commit in [Deploy to GitHub Pages](https://github.com/xw7qwq/nfuwari/actions/workflows/deploy.yml). Once it succeeds, inspect affected pages on the [website](https://blog.lucius7.cn/). The workflow also supports manual runs from Actions.
+Check the current commit in [Deploy to GitHub Pages](https://github.com/xw7qwq/blog/actions/workflows/deploy.yml). Once it succeeds, inspect affected pages on the [website](https://blog.lucius7.cn/). The workflow also supports manual runs from Actions.
 
 Sync the merged default branch locally:
 
@@ -91,7 +91,7 @@ git pull --ff-only
 
 CI uses Node.js 24, the pinned pnpm version, and the lockfile, then runs `pnpm lint`, `pnpm check`, `pnpm test:i18n`, `pnpm test:macflare`, `pnpm test:ojflare`, and `pnpm build`. Merging a validated PR into `main` triggers another full check and build, uploads the output, and deploys it to GitHub Pages. Deployment does not reuse Astro's content cache, preventing deleted posts from reappearing.
 
-In [Settings → Pages](https://github.com/xw7qwq/nfuwari/settings/pages), the source should be **GitHub Actions** and the custom domain should be `blog.lucius7.cn`. Commit source files only; no separate `gh-pages` branch is needed.
+In [Settings → Pages](https://github.com/xw7qwq/blog/settings/pages), the source should be **GitHub Actions** and the custom domain should be `blog.lucius7.cn`. Commit source files only; no separate `gh-pages` branch is needed.
 
 ## Domain and HTTPS
 

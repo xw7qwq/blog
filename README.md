@@ -1,7 +1,7 @@
 # Lucius7's Blog
 
-[![CI](https://github.com/xw7qwq/nfuwari/actions/workflows/build.yml/badge.svg)](https://github.com/xw7qwq/nfuwari/actions/workflows/build.yml)
-[![GitHub Pages](https://github.com/xw7qwq/nfuwari/actions/workflows/deploy.yml/badge.svg)](https://github.com/xw7qwq/nfuwari/actions/workflows/deploy.yml)
+[![CI](https://github.com/xw7qwq/blog/actions/workflows/build.yml/badge.svg)](https://github.com/xw7qwq/blog/actions/workflows/build.yml)
+[![GitHub Pages](https://github.com/xw7qwq/blog/actions/workflows/deploy.yml/badge.svg)](https://github.com/xw7qwq/blog/actions/workflows/deploy.yml)
 
 Source for [blog.lucius7.cn](https://blog.lucius7.cn/), built with [Fuwari](https://github.com/saicaca/fuwari) and Astro. Write posts in Markdown, merge them into `main`, and GitHub Actions publishes the site to GitHub Pages. Alibaba Cloud ESA serves the custom domain.
 
@@ -35,8 +35,8 @@ ESA provides HTTPS for the public site. The GitHub Pages origin certificate has 
 Install Git, **Node.js 24**, and **pnpm 9.14.4**:
 
 ```sh
-git clone https://github.com/xw7qwq/nfuwari.git
-cd nfuwari
+git clone https://github.com/xw7qwq/blog.git
+cd blog
 npm install -g pnpm@9.14.4
 pnpm install --frozen-lockfile
 pnpm dev
@@ -103,7 +103,7 @@ git commit -m "docs: publish first post"
 git push -u origin post/my-first-post
 ```
 
-Include any associated images in `git add`. Open a PR targeting `main` in the [repository](https://github.com/xw7qwq/nfuwari), wait for the current commit's CI to pass, and merge. Check the [deployment workflow](https://github.com/xw7qwq/nfuwari/actions/workflows/deploy.yml), then inspect the live site.
+Include any associated images in `git add`. Open a PR targeting `main` in the [repository](https://github.com/xw7qwq/blog), wait for the current commit's CI to pass, and merge. Check the [deployment workflow](https://github.com/xw7qwq/blog/actions/workflows/deploy.yml), then inspect the live site.
 
 See the [deployment guide](docs/DEPLOYMENT.md) for regular updates, failures, and cache troubleshooting. Commit source and post assets; exclude `dist/`, `.astro/`, and `node_modules/`.
 
@@ -132,7 +132,7 @@ The banner currently uses [Fuwari's bundled demo image](https://github.com/saica
 
 The sidebar's **Recent Submissions** widget reads [OJFlare's public dashboard API](https://ojflare.lucius7.dev/data/dashboard.json) in the browser. Its schema v2 `accepted` array contains accepted submissions only; failed attempts are not exported. The widget combines Codeforces and AtCoder entries, sorts by submission time, and displays the latest three, including repeated submissions to the same problem. Each row opens the API's original submission URL in a new tab. Problem titles come from the matching `problems` entry; times use the visitor's local time zone.
 
-The widget checks for updates every five minutes while the page is visible, respects HTTP caching, and refreshes when the tab becomes visible again. Data freshness depends on OJFlare's published snapshot. A failed refresh keeps previously loaded records; initial loading, empty results, and unavailable data have distinct Chinese/English states. No API key is needed, and the blog build does not depend on OJFlare availability. Set `ojFlareConfig.enable` to `false` to hide the OJFlare widgets or update `ojFlareConfig.baseUrl` to use a compatible API host. The contract is documented in [OJFlare's API guide](https://github.com/xw7qwq/ojflare/blob/main/docs/API.md).
+The widget checks for updates every five minutes while the page is visible, respects HTTP caching, and refreshes when the tab becomes visible again. Data freshness depends on OJFlare's published snapshot. A failed refresh keeps previously loaded records; initial loading, empty results, and unavailable data have distinct Chinese/English states. No API key is needed, and the blog build does not depend on OJFlare availability. Set `ojFlareConfig.enable` to `false` to hide the OJFlare widgets or update `ojFlareConfig.baseUrl` to use a compatible API host. The contract is documented in [OJFlare's API guide](https://github.com/xw7qwq/oj/blob/main/docs/API.md).
 
 The [Chinese About page](https://blog.lucius7.cn/zh/about/) and [English About page](https://blog.lucius7.cn/en/about/) include an **AC Contributions** calendar. `/about/` keeps its existing redirect to `/zh/about/`. Each square counts problems first accepted on that date, after deduplicating the complete accepted history by `problemId`; repeated ACs in later years do not become new problems. Dates follow OJFlare's **Asia/Taipei (UTC+8)** convention. Undated solves are excluded. The default view shows the current calendar year across AtCoder, Codeforces, QOJ, and Nowcoder, with year/platform selectors and annual problem/active-day totals. Color levels match OJFlare: 0, 1–2, 3–5, 6–9, and 10 or more new problems. Future cells are disabled.
 
@@ -169,7 +169,7 @@ The stack uses Astro 5, Svelte 5, Tailwind CSS 3, and TypeScript. `package.json`
 
 Dependabot PRs are update proposals. Review compatibility, validate the current head, then use **Squash and merge** and delete the merged branch. Close duplicate or unsuitable updates with a reason. Merges trigger deployment; inspect the live site afterward. See the [PR workflow](CONTRIBUTING.md#pr-workflow).
 
-Report problems or content corrections through [Issues](https://github.com/xw7qwq/nfuwari/issues). Read [CONTRIBUTING.md](CONTRIBUTING.md) for submission conventions and the [upstream repository](https://github.com/saicaca/fuwari) for general Fuwari documentation.
+Report problems or content corrections through [Issues](https://github.com/xw7qwq/blog/issues). Read [CONTRIBUTING.md](CONTRIBUTING.md) for submission conventions and the [upstream repository](https://github.com/saicaca/fuwari) for general Fuwari documentation.
 
 Thanks to Fuwari, Astro, and the open-source projects used here. Project code retains the [MIT license](LICENSE) and original attribution. The post license is configured in `src/config.ts`; images and other third-party materials retain their own licenses.
 
