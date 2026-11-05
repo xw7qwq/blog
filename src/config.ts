@@ -9,12 +9,14 @@ import type {
 } from "./types/config";
 import { LinkPreset } from "./types/config";
 
+const avatarUrl = "https://q1.qlogo.cn/g?b=qq&nk=3012967200&s=640";
+
 export const siteConfig: SiteConfig = {
 	title: "Lucius7's Blog",
 	subtitle: "",
 	lang: "zh_CN", // Legacy fallback; page language comes from the /zh/ or /en/ route.
 	themeColor: {
-		hue: 250, // Default hue for the theme color, from 0 to 360. e.g. red: 0, teal: 200, cyan: 250, pink: 345
+		hue: 354, // xw7 brand pink (#b4527f), shared with the lucius7.dev panel. From 0 to 360, e.g. red: 0, teal: 200, cyan: 250
 		fixed: false, // Hide the theme color picker for visitors
 	},
 	banner: {
@@ -32,12 +34,9 @@ export const siteConfig: SiteConfig = {
 		depth: 2, // Maximum heading depth to show in the table, from 1 to 3
 	},
 	favicon: [
-		// Leave this array empty to use the default favicon
-		// {
-		//   src: '/favicon/icon.png',    // Path of the favicon, relative to the /public directory
-		//   theme: 'light',              // (Optional) Either 'light' or 'dark', set only if you have different favicons for light and dark mode
-		//   sizes: '32x32',              // (Optional) Size of the favicon, set only if you have favicons of different sizes
-		// }
+		{
+			src: avatarUrl,
+		},
 	],
 };
 
@@ -55,7 +54,7 @@ export const navBarConfig: NavBarConfig = {
 };
 
 export const profileConfig: ProfileConfig = {
-	avatar: "https://q1.qlogo.cn/g?b=qq&nk=3012967200&s=640", // QQ 头像，直接使用腾讯 HTTPS 接口
+	avatar: avatarUrl,
 	name: "Lucius7",
 	bio: "空のない世界に、花の香り描き",
 	links: [

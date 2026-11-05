@@ -2,24 +2,33 @@ import {
 	AUTO_MODE,
 	DARK_MODE,
 	DEFAULT_THEME,
+	LEGACY_DEFAULT_HUE,
 	LIGHT_MODE,
 } from "@constants/constants.ts";
 import { expressiveCodeConfig } from "@/config";
 import type { LIGHT_DARK_MODE } from "@/types/config";
 
 export function getDefaultHue(): number {
-	const fallback = "250";
+	const fallback = "354";
 	const configCarrier = document.getElementById("config-carrier");
 	return Number.parseInt(configCarrier?.dataset.hue || fallback, 10);
 }
 
 export function getHue(): number {
 	const stored = localStorage.getItem("hue");
-	return stored ? Number.parseInt(stored, 10) : getDefaultHue();
+	if (!stored || stored === String(LEGACY_DEFAULT_HUE)) {
+		return getDefaultHue();
+	}
+	return Number.parseInt(stored, 10);
 }
 
 export function setHue(hue: number): void {
-	localStorage.setItem("hue", String(hue));
+	// Remember only a hue the visitor picked, so a new default reaches everyone else.
+	if (hue === getDefaultHue()) {
+		localStorage.removeItem("hue");
+	} else {
+		localStorage.setItem("hue", String(hue));
+	}
 	const r = document.querySelector(":root") as HTMLElement;
 	if (!r) {
 		return;

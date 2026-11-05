@@ -16,6 +16,7 @@ import {
 	BANNER_HEIGHT_HOME,
 	DARK_MODE,
 	DEFAULT_THEME,
+	LEGACY_DEFAULT_HUE,
 	LIGHT_MODE,
 	PAGE_WIDTH,
 } from "../constants/constants";
@@ -129,7 +130,7 @@ const bannerOffset =
 		))}
 
 		<!-- Set the theme before the page is rendered to avoid a flash -->
-		<script is:inline define:vars={{DEFAULT_THEME, LIGHT_MODE, DARK_MODE, AUTO_MODE, BANNER_HEIGHT_EXTEND, PAGE_WIDTH, configHue}}>
+		<script is:inline define:vars={{DEFAULT_THEME, LIGHT_MODE, DARK_MODE, AUTO_MODE, BANNER_HEIGHT_EXTEND, PAGE_WIDTH, configHue, LEGACY_DEFAULT_HUE}}>
 			// Load the theme from local storage
 			const theme = localStorage.getItem('theme') || DEFAULT_THEME;
 			switch (theme) {
@@ -147,9 +148,13 @@ const bannerOffset =
 					}
 			}
 
-			// Load the hue from local storage
-			const hue = localStorage.getItem('hue') || configHue;
-			document.documentElement.style.setProperty('--hue', hue);
+			// Load the hue from local storage; the old default counts as no choice
+			let hue = localStorage.getItem('hue');
+			if (hue === String(LEGACY_DEFAULT_HUE)) {
+				localStorage.removeItem('hue');
+				hue = null;
+			}
+			document.documentElement.style.setProperty('--hue', hue || configHue);
 
 			// calculate the --banner-height-extend, which needs to be a multiple of 4 to avoid blurry text
 			let offset = Math.floor(window.innerHeight * (BANNER_HEIGHT_EXTEND / 100));

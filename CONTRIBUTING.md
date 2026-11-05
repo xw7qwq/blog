@@ -6,7 +6,7 @@ Use English for project documentation, Issues, pull requests, and commit message
 
 ## Local development
 
-Use Node.js 22 (at least 22.12) and pnpm 9.14.4 to match CI:
+Use Node.js 24 and pnpm 9.14.4 to match CI:
 
 ```sh
 npm install -g pnpm@9.14.4
@@ -39,7 +39,7 @@ Commit `package.json` and `pnpm-lock.yaml` together when changing dependencies. 
 
 Dependabot PRs need the same review and page validation as other updates. Do not merge solely because a bot opened the PR or CI passed.
 
-Dependabot groups Expressive Code's core, Astro integration, and plugins to avoid mixing renderer versions. For KaTeX updates, confirm that the renderer used by `rehype-katex` matches the direct dependency's CSS and fonts. The post directory is currently empty: use temporary posts to validate changes affecting Markdown, math, or code blocks, then remove the fixtures before committing or publishing.
+Dependabot groups Expressive Code's core, Astro integration, and plugins to avoid mixing renderer versions. For KaTeX updates, confirm that the renderer used by `rehype-katex` matches the direct dependency's CSS and fonts. Validate changes affecting Markdown, math, or code blocks against existing articles. Use temporary posts for cases not covered by published content, then remove the fixtures before committing or publishing.
 
 Changes to language routing, content filtering, search, or the post generator also require `pnpm test:i18n`. Preview both `/zh/` and `/en/`: the same query should return only the active language, a language switch should update the whole interface, and a missing translation should lead to the target language's home page. The test creates posts in a temporary directory without changing real content. See the [bilingual content guide](docs/I18N.md).
 
