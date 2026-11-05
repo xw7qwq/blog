@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   validate:
-    name: Lint, check and build
+    name: check
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:

@@ -6,7 +6,7 @@ Use English for project documentation, Issues, pull requests, and commit message
 
 ## Local development
 
-Use Node.js 22 (at least 22.12) and pnpm 9.14.4 to match CI:
+Use Node.js 24 and pnpm 9.14.4 to match CI:
 
 ```sh
 npm install -g pnpm@9.14.4
