@@ -1,24 +1,24 @@
 # 本地运行与部署
 
-网站：[blog.lucius7.cn](https://blog.lucius7.cn/) · 源码：[xw7qwq/nfuwari](https://github.com/xw7qwq/nfuwari)
+网站：[blog.lucius7.cn](https://blog.lucius7.cn/) · 源码：[xw7qwq/blog](https://github.com/xw7qwq/blog)
 
 文章格式与图片说明见 [写作指南](WRITING.zh-CN.md)，数学公式见 [LaTeX 指南](LATEX.zh-CN.md)。
 
 ## 安装开发环境
 
-安装 Git 与 Node.js 22（至少 22.12），然后安装项目指定的 pnpm 9.14.4：
+安装 Git 与 Node.js 24，然后安装项目指定的 pnpm 9.14.4：
 
 ```sh
 node --version
 npm install -g pnpm@9.14.4
 pnpm --version
-git clone https://github.com/xw7qwq/nfuwari.git
-cd nfuwari
+git clone https://github.com/xw7qwq/blog.git
+cd blog
 pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-如果使用 nvm，可在仓库目录执行 `nvm install` 与 `nvm use`，再安装 pnpm 和依赖。`.nvmrc` 指定 Node.js 22，`package.json` 的 `engines` 与 `packageManager` 记录详细版本要求。不要在已有工作副本里重复克隆仓库。
+如果使用 nvm，可在仓库目录执行 `nvm install` 与 `nvm use`，再安装 pnpm 和依赖。`.nvmrc` 指定 Node.js 24，`package.json` 的 `engines` 与 `packageManager` 记录详细版本要求。不要在已有工作副本里重复克隆仓库。
 
 打开终端显示的网址，默认是 `http://localhost:4321/`。开发模式会显示草稿；按 `Ctrl+C` 停止。端口被占用时使用终端实际显示的端口，或执行 `pnpm dev --port 4322`。
 
@@ -76,9 +76,9 @@ git push -u origin post/my-first-post
 
 ### 5. 合并 PR 并检查线上
 
-打开 [仓库 Pull Requests](https://github.com/xw7qwq/nfuwari/pulls)，创建写作分支到 `main` 的 PR，说明修改和验证结果。确认 CI 通过后合并。分支推送和 PR 创建不会直接更新线上站点；合并到 `main` 才触发发布。
+打开 [仓库 Pull Requests](https://github.com/xw7qwq/blog/pulls)，创建写作分支到 `main` 的 PR，说明修改和验证结果。确认 CI 通过后合并。分支推送和 PR 创建不会直接更新线上站点；合并到 `main` 才触发发布。
 
-在 [Deploy to GitHub Pages](https://github.com/xw7qwq/nfuwari/actions/workflows/deploy.yml) 查看当前提交的运行结果。成功后打开 [网站](https://blog.lucius7.cn/) 检查受影响页面。工作流也支持在 Actions 页面手动运行。
+在 [Deploy to GitHub Pages](https://github.com/xw7qwq/blog/actions/workflows/deploy.yml) 查看当前提交的运行结果。成功后打开 [网站](https://blog.lucius7.cn/) 检查受影响页面。工作流也支持在 Actions 页面手动运行。
 
 完成后，在本地同步合并后的主线：
 
@@ -89,9 +89,9 @@ git pull --ff-only
 
 ## 自动部署配置
 
-CI 使用 Node.js 22、指定版本的 pnpm 与锁文件，依次执行 `pnpm lint`、`pnpm check`、`pnpm test:i18n`、`pnpm build`。PR 检查通过后，合并到 `main` 会触发发布工作流：再次检查并完整构建，上传构建产物，再部署到 GitHub Pages。发布不复用 Astro 内容缓存，以免删除文章后仍生成旧内容。
+CI 使用 Node.js 24、指定版本的 pnpm 与锁文件，依次执行 `pnpm lint`、`pnpm check`、`pnpm test:i18n`、`pnpm build`。PR 检查通过后，合并到 `main` 会触发发布工作流：再次检查并完整构建，上传构建产物，再部署到 GitHub Pages。发布不复用 Astro 内容缓存，以免删除文章后仍生成旧内容。
 
-在 [Settings → Pages](https://github.com/xw7qwq/nfuwari/settings/pages) 中，发布来源应为 **GitHub Actions**，Custom domain 为 `blog.lucius7.cn`。只需要提交源码，GitHub Pages 不需要单独维护 `gh-pages` 分支。
+在 [Settings → Pages](https://github.com/xw7qwq/blog/settings/pages) 中，发布来源应为 **GitHub Actions**，Custom domain 为 `blog.lucius7.cn`。只需要提交源码，GitHub Pages 不需要单独维护 `gh-pages` 分支。
 
 ## 域名与 HTTPS
 
@@ -114,7 +114,7 @@ site: "https://blog.lucius7.cn/",
 | 现象 | 处理方式 |
 | --- | --- |
 | 找不到 `node` 或 `pnpm` | 检查 Node.js 安装；使用 nvm 时先执行 `nvm use`，再安装指定 pnpm |
-| Node.js 版本不符合要求 | 使用 Node.js 22.12 或更高的 22.x；不要直接使用其他大版本替代 |
+| Node.js 版本不符合要求 | 使用 Node.js 24.x；不要直接使用其他大版本替代 |
 | `--frozen-lockfile` 安装失败 | 先同步代码，确认 `package.json` 与锁文件来自同一提交；依赖变更应同时更新二者 |
 | 本地正常，CI 失败 | 打开失败步骤日志，重点检查文件大小写、遗漏提交的图片和环境版本 |
 | 推送被拒绝 | 检查 GitHub 登录与仓库写权限；已有远端修改时先同步并处理冲突，不使用强推覆盖 |
