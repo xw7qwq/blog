@@ -16,27 +16,31 @@
 
 ## 项目
 
-下面这些项目大多基于开源软件，按自己的需要改造，介绍的是我维护和改动的部分。
+这些项目大多基于开源软件，部署在我自己的 VPS 上，按需要改造。下面介绍的是我维护和改动的部分。
 
 ### DMOJ：算法训练与评测
 
-用 DMOJ 搭了自己的算法训练环境：
+用 [DMOJ](https://github.com/DMOJ/site) 搭了自己的算法训练环境，部署包括网页、后台任务、bridge、评测机、数据库和缓存，另有 PDF 服务和 HDU 特判适配服务。
 
-- 导入赛事题库，适配不同来源的 checker；
-- 实现同进度排名（按相同的比赛用时比较）和受限附件访问；
-- 接入 Windows 的特判程序，用到了 Wine、Unix socket 和独立容器。
+- 导入赛事题库，适配不同来源的 checker。迁移题目时要同时对齐输入输出约定、checker 行为、编译环境和评分规则；
+- 改了比赛计分、排名可见性和提交界面，实现同进度排名（按相同的比赛用时比较）和受限附件访问；
+- 接入 HDU 的 SPJ；为了运行 Windows 的特判程序，用到了 Wine、Unix socket 和独立容器。
 
-### 邮件：Bulwark / Stalwart
+### 邮件：Stalwart / Bulwark
 
-为多域名邮件定制了归档规则、文件夹维护和 Passkey 登录。涉及 JMAP、Sieve、WebAuthn 和 TypeScript，也要处理凭据撤销、状态变化和请求失败的情况。
+服务端用 Stalwart，网页端用 [Bulwark Webmail](https://github.com/bulwarkmail/webmail)。为多域名邮件定制了归档规则、按域名组织的文件夹和 Passkey 登录，涉及 JMAP、Sieve、WebAuthn 和 TypeScript。
+
+这些改动要把界面、认证和协议放在一起考虑：界面上的文件夹怎么对应服务端，登录状态怎么带到后续请求，凭据撤销、状态变化或请求失败时怎么处理。
 
 ### FitBaus：数据同步与展示
 
-在现有的 Fitbit 看板上加了缓存、日 / 周 / 月汇总、定时同步、中文界面，以及 JSON API 和 SVG 输出。需要处理重复同步、缓存失效和管理操作的权限边界。
+在现有的 Fitbit 看板上加了缓存、日 / 周 / 月汇总、定时同步、中文界面，以及只读的 JSON API 和 SVG 输出。需要处理重复同步、缓存失效和管理操作的权限边界。
 
 ### NeXus：网络服务门户
 
-基于 EZ-Theme、Xboard 等开源项目改的个人网络服务门户，包括 Vue 页面、Go 写的同源中间层、流量统计和客户端配置兼容。前端做了按需加载、合并进行中的重复读取请求，并处理登录状态变化之后才返回的异步响应。
+基于 EZ-Theme、Xboard 等开源项目改的个人网络服务门户，由 Vue 前端、Go 写的同源中间层和已有的后端组成。中间层把浏览器操作映射到后端接口，前端按接口实际支持的能力显示功能；另外做了流量统计和客户端配置兼容。
+
+前端做了按需加载、合并进行中的重复读取请求，并处理登录状态变化之后才返回的异步响应。其中的接口兼容改动提交回了上游 EZ-Theme。
 
 ### PT 工具：OpenCD、PT Tools 与 qBittorrent
 
@@ -56,19 +60,19 @@
 
 | 项目 | 作用 | 和本站的关系 |
 | --- | --- | --- |
-| [nfuwari](https://github.com/xw7qwq/nfuwari) | 基于 Astro / Fuwari 的博客 | 保存文章、生成页面，接入下面介绍的公开 API |
+| [blog](https://github.com/xw7qwq/blog) | 基于 Astro / Fuwari 的博客 | 保存文章、生成页面，接入下面介绍的公开 API |
 | [MacFlare](https://github.com/xw7qwq/macflare) | 采集并发布 Mac 的应用与音乐状态 | 为顶部导航提供应用图标和歌曲封面 |
-| [OJFlare](https://github.com/xw7qwq/ojflare) | 汇总多平台提交、比赛进度与 Rating | 为左侧最近提交和本页的 AC 贡献图提供数据 |
-| [CodeFlare](https://github.com/xw7qwq/codeflare) | 整理算法源码、模板与提交归档 | 提供独立的代码检索和源码阅读页面，供题解和复盘引用 |
+| [OJFlare](https://github.com/xw7qwq/oj) | 汇总多平台提交、比赛进度与 Rating | 为左侧最近提交和本页的 AC 贡献图提供数据 |
+| [CodeFlare](https://github.com/xw7qwq/solutions) | 整理算法源码、模板与提交归档 | 提供独立的代码检索和源码阅读页面，供题解和复盘引用 |
 | [.github](https://github.com/xw7qwq/.github) | 组织介绍、贡献指南与协作约定 | 统一各仓库的维护方式 |
 
 ### 发布流程
 
 **Markdown → Astro 构建 → GitHub Pages → 阿里云 ESA → 浏览器**
 
-文章以 Markdown 存在 nfuwari 里，中英文分开写。先在本地用草稿预览，提交到 GitHub 后通过检查、合入 `main`，再由 GitHub Actions 构建发布。
+文章以 Markdown 存在 blog 仓库里，中英文分开写。先在本地用草稿预览，提交到 GitHub 后通过检查、合入 `main`，再由 GitHub Actions 构建发布。
 
-Astro 生成静态页面，Fuwari 是主题，KaTeX 渲染公式，Pagefind 在构建时生成搜索索引。GitHub Pages 托管构建结果，阿里云 ESA 为 `blog.lucius7.cn` 提供边缘分发和 HTTPS。写作和部署的细节见仓库里的[写作指南](https://github.com/xw7qwq/nfuwari/blob/main/docs/WRITING.md)和[部署指南](https://github.com/xw7qwq/nfuwari/blob/main/docs/DEPLOYMENT.md)。
+Astro 生成静态页面，Fuwari 是主题，KaTeX 渲染公式，Pagefind 在构建时生成搜索索引。GitHub Pages 托管构建结果，阿里云 ESA 为 `blog.lucius7.cn` 提供边缘分发和 HTTPS。写作和部署的细节见仓库里的[写作指南](https://github.com/xw7qwq/blog/blob/main/docs/WRITING.zh-CN.md)和[部署指南](https://github.com/xw7qwq/blog/blob/main/docs/DEPLOYMENT.zh-CN.md)。
 
 ### 中英文切换
 
@@ -97,7 +101,7 @@ Astro 生成静态页面，Fuwari 是主题，KaTeX 渲染公式，Pagefind 在�
 - **左侧最近提交**：按提交时间显示最近三条 Codeforces / AtCoder 的 AC 记录，点击直达原平台的提交页。同一题的多次 AC 会分别显示。
 - **本页下方的 AC 贡献图**：按 UTC+8 统计已收集记录中每天首次 AC 的题数。同一题只算最早通过的那天，可以按年份和平台筛选。
 
-两处共用一次数据请求，页面可见时定期刷新；数据有多新取决于 OJFlare 的同步和发布，实现见它的 [API 文档](https://github.com/xw7qwq/ojflare/blob/main/docs/API.md)。这些公开接口都在页面加载后才读取，所以文章的构建和阅读不依赖接口当时是否在线。
+两处共用一次数据请求，页面可见时定期刷新；数据有多新取决于 OJFlare 的同步和发布，实现见它的 [API 文档](https://github.com/xw7qwq/oj/blob/main/docs/API.md)。这些公开接口都在页面加载后才读取，所以文章的构建和阅读不依赖接口当时是否在线。
 
 **CodeFlare：源码归档。** [CodeFlare](https://codeflare.lucius7.dev/) 按平台和目录展示代码，支持搜索和在线阅读。归档工具会借助 OJFlare 的题目、比赛和 AC 元数据来整理，再从能获取的来源补充提交信息和源码。仓库里也有模板、没写完的代码和没通过的尝试，所以文件数量不等于过题数。博客里的题解分析由我撰写，通过链接引用这里的代码；本站直接接入的数据 API 只有 MacFlare 和 OJFlare。
 

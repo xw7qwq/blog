@@ -1,7 +1,7 @@
 ---
 title: "2026 年阶段记录：算法竞赛、开源贡献与自建服务（AI 撰写）"
 published: 2026-09-22
-updated: 2026-10-13
+updated: 2026-11-05
 description: '本文由 AI 根据我的做题、比赛和 GitHub 记录整理撰写。汇总 2026 年 1 月至 9 月的比赛成绩、算法训练、开源贡献和自建服务。'
 image: ''
 tags: [个人记录, 算法竞赛, 自建服务, 开源, VPS]
@@ -21,7 +21,7 @@ lang: zh_CN
 - **比赛**：11 个赛事阶段，4 金 4 银 3 铜，包括 ICPC 贵州省赛银奖（总榜第 10）、百度之星人才专项决赛金奖、码蹄杯本科国赛金奖。
 - **刷题**：Codeforces 和 AtCoder 今年新增 AC 472 题。AtCoder 从 1083 涨到 1463，Codeforces 当前 1617（Expert）。
 - **开源**：5 个 PR 已合并，主要是给 QQ Chat Exporter 做的 WebSocket 认证和私聊漫游导出。
-- **项目**：博客和配套的 OJFlare、CodeFlare、MacFlare；VPS 上自部署了 DMOJ 评测系统、邮件服务等 19 组 Docker Compose 项目。
+- **项目**：博客和配套的 OJFlare、CodeFlare、MacFlare；VPS 上自部署了 DMOJ 评测系统、邮件服务等 19 组 Docker Compose 项目，具体改动见[关于页](/zh/about/#项目)。
 
 ## 比赛
 
@@ -109,39 +109,23 @@ Codeforces 今年新增的 246 题里，142 题有官方难度，其中 26 题�
 - **任务管理**：处理排队、并发控制、取消和状态恢复。查询限制了日期跨度、消息数量和执行预算，结果会标明是否完整以及停止原因。
 - **限制**：依赖已登录的 QQ 和桥接能力，属于实验功能，不保证能取回全部云端历史。
 
+### DreamStream99
+
+[DreamStream99](https://github.com/ypnomania/DreamStream99) 是一个 Win98 风格的多人一起看视频的项目，静态前端和房间同步、媒体处理服务分开部署。多人观看时，播放、暂停、跳转和重新进入房间都要同步，还要处理房主权限和重复操作。[#1](https://github.com/ypnomania/DreamStream99/pull/1) 实现了服务端创建房间、房主与访客权限和播放操作去重，并改进了 YouTube 同步。
+
 ### Daily_CF_Problems
 
 这是一个多人维护的 Codeforces 题解仓库，我会把平时写的题解整理后提交上去，[已合并的题解 PR](https://github.com/Yawn-Sean/Daily_CF_Problems/pulls?q=is%3Apr+is%3Amerged+author%3AtheLucius7) 都可以在这里看到。
 
-## 项目与自建服务
-
-### 博客和配套项目
-
-博客和几个配套项目放在 [xw7qwq](https://github.com/xw7qwq) 组织下：
-
-| 项目 | 作用 |
-| --- | --- |
-| [nfuwari](https://github.com/xw7qwq/nfuwari) | 博客本体，基于 Astro 和 Fuwari，保存文章与学习笔记 |
-| [OJFlare](https://github.com/xw7qwq/ojflare) | 汇总多平台 AC、比赛和 Rating 记录，为最近提交与贡献图提供数据 |
-| [CodeFlare](https://github.com/xw7qwq/codeflare) | 归档算法源码和模板，提供独立的代码检索、阅读入口 |
-| [MacFlare](https://github.com/xw7qwq/macflare) | 提供 Mac 上的应用和音乐状态，在博客顶部展示应用图标与歌曲信息 |
-| [.github](https://github.com/xw7qwq/.github) | 组织介绍、贡献说明和维护约定 |
-
-文章用 Markdown 写，经 Astro 构建后部署到 GitHub Pages，域名通过阿里云 ESA 分发。刷题记录和 Mac 状态由浏览器直接请求各自的公开 API；CodeFlare 是单独的源码站点，文章里的代码都链接到它。OJFlare 按 UTC+8 记录每道题的首次 AC，用来看进度；CodeFlare 保存全部代码，包括模板、尝试和没写完的代码，用来复盘。完整结构见[关于页面](/zh/about/)。
-
-### VPS 上的服务
+## 自建服务
 
 截至 9 月 22 日，VPS 上跑着 19 组 Docker Compose 项目、34 个容器，另有一些用 systemd 或独立进程管理的服务。它们大多是现成的开源项目，我做的主要是部署、配置，以及按自己的需要改接口和界面。
 
-**DMOJ。** 和算法训练关系最近的是自部署的 [DMOJ](https://github.com/DMOJ/site)，包括网页、后台任务、bridge、评测机、数据库和缓存，另外加了 PDF 服务和 HDU 特判适配服务。一次提交从网页接收、任务分发、编译运行到结果回传，每一环都要自己配置。我改了比赛计分、排名可见性和提交界面，接入了 HDU 的 SPJ。迁移题目时，要同时对齐输入输出约定、checker 行为、编译环境和评分规则。
+其中改动较多的 DMOJ 评测系统、Stalwart / Bulwark 邮件、FitBaus 数据看板和 NeXus 门户，具体做了什么写在[关于页](/zh/about/#项目)；博客本身和 OJFlare、CodeFlare、MacFlare 的结构也在[关于页](/zh/about/#关于这个网站)。
 
-**邮件。** 服务端用 Stalwart，网页端用 [Bulwark Webmail](https://github.com/bulwarkmail/webmail)。本地改了按域名组织文件夹、JMAP 交互和 Passkey 登录。这些改动要把界面、认证和协议放在一起考虑：界面上的文件夹怎么对应服务端，登录状态怎么带到后续请求，操作失败时怎么提示。
+Fast Note Sync 配合 Obsidian 插件同步笔记和附件，RSSHub、OpenList、TaoSync 负责订阅、文件入口和同步。这类服务碰到的问题差不多：什么时候更新，失败怎么重试，旧数据还能不能用，怎么知道上次同步成功是什么时候。
 
-**数据和笔记。** FitBaus 提供 Fitbit 数据看板和只读 API；Fast Note Sync 配合 Obsidian 插件同步笔记和附件；RSSHub、OpenList、TaoSync 负责订阅、文件入口和同步。这几类服务碰到的问题差不多：什么时候更新，失败怎么重试，旧数据还能不能用，怎么知道上次同步成功是什么时候。
-
-**多人同步与接口适配。** [DreamStream99](https://github.com/ypnomania/DreamStream99) 把 Win98 风格的静态前端和房间同步、媒体处理服务分开。多人一起看视频时，播放、暂停、跳转和重新进入房间都要同步，还要处理房主权限和重复操作。NeXus / Xboard 由前端、同源中间层和已有后端组成：中间层把浏览器操作映射到后端接口，前端按接口实际支持的功能显示。EZ-Theme 的兼容 PR 就来自这里。
-
-**其他服务：**
+其他配套服务：
 
 | 用途 | 项目或组件 |
 | --- | --- |
