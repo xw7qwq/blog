@@ -1,68 +1,82 @@
 # About
 
-## Preface
+:::note[About this page]
+This page was written by AI, based on my projects, repositories, and site configuration.
+:::
 
-> This page was published by AI and is awaiting revision and polishing.
+I'm [Lucius7](https://github.com/theLucius7). I enjoy algorithms, private trackers, and self-hosting. This blog collects problem write-ups, tool customizations, and lessons from running my own services, so I can come back to them later. My 2026 competition results, practice data, and open-source contributions are summarized in a [progress record (in Chinese)](/zh/posts/2026-september-lab-notes/).
 
-I'm [Lucius7](https://github.com/theLucius7). I enjoy algorithms, private trackers, and self-hosting. I write about problems I've solved, tools I've customized, and lessons from maintaining my own services. These notes help me return to an idea and understand how I reached it.
+## Technical focus
 
-## Interests and technical focus
+I mainly work on **backend development, API integration, and automation**, using Python, Go, and JavaScript / TypeScript. I also change frontends and connect APIs, and deploy with Linux, Docker Compose, Caddy, and systemd.
 
-I like improving the tools I use for algorithm practice, OpenCD, email, and data dashboards. Repetitive tasks and rough edges often turn into small tools. Using private trackers also gives me practical reasons to improve account synchronization, capacity management, and seeding maintenance.
+Beyond getting features to work, I care about three things: whether state stays consistent, how to recover from failures, and how to verify a change.
 
-My projects focus on **backend development, API integration, and automation**, using Python, Go, and JavaScript / TypeScript. I also customize frontends and maintain deployments with Linux, Docker Compose, Caddy, and systemd. I care about consistent state, recovery from failures, and checking that a change does what it is supposed to do.
+Most of what I build starts from my own needs: an algorithm practice environment, OpenCD, email, data dashboards, and small tools for repetitive or awkward tasks.
 
-## Projects I work on
+## Projects
 
-Most of these projects build on open-source software, adapted to my own needs. The descriptions below focus on the parts I maintain and customize.
+Most of these projects build on open-source software, run on my own VPS, and are adapted to my needs. The descriptions cover the parts I maintain and change.
 
-### Algorithm practice and judging: DMOJ
+### DMOJ: algorithm practice and judging
 
-I use DMOJ as the foundation for an algorithm practice environment, working on contest imports, checker compatibility, rankings at equal elapsed contest time, and access to restricted attachments. Integrating Windows special judges has also involved Wine, Unix sockets, and a separate container. This connects algorithm practice with data preparation, backend logic, and deployment work.
+My algorithm practice environment runs on [DMOJ](https://github.com/DMOJ/site). The deployment includes the site, background workers, the bridge, judges, a database, and a cache, plus a PDF service and an adapter service for HDU special judges.
 
-### Private trackers, OpenCD, and seeding maintenance
+- Import contest problem sets and adapt checkers from different sources. Migrating a problem means aligning I/O conventions, checker behavior, the compiler environment, and scoring rules;
+- Change contest scoring, ranking visibility, and the submission page, and add rankings at equal elapsed contest time and restricted attachment access;
+- Integrate HDU special judges; running Windows special judges uses Wine, Unix sockets, and a separate container.
 
-I enjoy using private trackers (PT), and currently use OpenCD. For everyday seeding and resource management, I have customized workflows around PT Tools and qBittorrent: refreshing account information without an open browser, rechecking actual size and capacity before admitting tasks, and using a Python guard to check task completion, file availability, and tracker acknowledgement.
+### Email: Stalwart / Bulwark
 
-These changes have led me to spend more time on concurrent tasks, state synchronization, and failure handling. I separate key decisions into logic that can be tested with mock APIs, making the tools easier to inspect and maintain.
+Stalwart runs the mail server and [Bulwark Webmail](https://github.com/bulwarkmail/webmail) the web client. For mail across multiple domains, I customized filing rules, per-domain folders, and Passkey login, working with JMAP, Sieve, WebAuthn, and TypeScript.
 
-### Network service portal: NeXus
+These changes cover the interface, authentication, and protocol together: how folders in the interface map to the server, how login state carries over to later requests, and what happens when credentials are revoked, state changes, or a request fails.
 
-I customize a personal network service portal based on open-source projects including EZ-Theme and Xboard. The work spans Vue pages, a Go same-origin backend, traffic statistics, and client configuration compatibility. Frontend changes include lazy loading, sharing in-flight read requests, and handling asynchronous responses after login state changes.
+### FitBaus: data synchronization and presentation
 
-### Email and authentication: Bulwark / Stalwart
+On top of an existing Fitbit dashboard, I added caching, daily / weekly / monthly summaries, scheduled synchronization, a Chinese interface, and read-only JSON API and SVG output. The work involves overlapping sync jobs, cache invalidation, and access control for administrative actions.
 
-For email across multiple domains, I customize filing rules, folder maintenance, and Passkey login integration. This involves JMAP, Sieve, WebAuthn, and TypeScript, with attention to credential revocation, changing state, and failed requests.
+### NeXus: network service portal
 
-### Data synchronization and presentation: Fitbaus
+A personal network service portal built from open-source projects including EZ-Theme and Xboard. It consists of a Vue frontend, a same-origin middle layer written in Go, and an existing backend. The middle layer maps browser actions to backend APIs, and the frontend shows features according to what the APIs actually support. I also added traffic statistics and client configuration compatibility.
 
-I extend an existing Fitbit dashboard with caching, daily/weekly/monthly summaries, scheduled synchronization, a Chinese interface, and JSON API / SVG output. I enjoy connecting data preparation to a usable interface, including the details of overlapping sync jobs, cache invalidation, and access controls for administrative actions.
+On the frontend, I added lazy loading, shared in-flight read requests, and handling for asynchronous responses that arrive after login state changes. The API compatibility changes were contributed back to EZ-Theme.
 
-## Projects behind this blog
+### Private tracker tools: OpenCD, PT Tools, and qBittorrent
 
-The blog and its supporting projects live in the [xw7qwq](https://github.com/xw7qwq) organization. Articles, source code, solving history, and device activity have their own sources and meet here on the blog.
+I use OpenCD. For everyday seeding and resource management, I changed the workflows around PT Tools and qBittorrent:
+
+- Refresh account information in the background, without a browser;
+- Recheck the actual size and free capacity before adding a task;
+- Use a Python guard to check whether tasks have finished, files still exist, and trackers have acknowledged them.
+
+The changes mostly deal with concurrent tasks, state synchronization, and failures. Key decisions are separated into logic tested against mock APIs.
+
+## About this site
+
+### Components
+
+The site's source and supporting projects live in the [xw7qwq](https://github.com/xw7qwq) organization:
 
 | Project | Purpose | Role on this site |
 | --- | --- | --- |
-| [nfuwari](https://github.com/xw7qwq/nfuwari) | An Astro / Fuwari blog | Stores articles, builds pages, and integrates the public APIs described below |
+| [blog](https://github.com/xw7qwq/blog) | An Astro / Fuwari blog | Stores articles, builds pages, and integrates the public APIs described below |
 | [MacFlare](https://github.com/xw7qwq/macflare) | Publishes Mac application and music activity | Supplies the app icon and track artwork in the top navigation |
-| [OJFlare](https://github.com/xw7qwq/ojflare) | Collects submissions, contest progress, and ratings | Supplies recent submissions and this page's AC contribution calendar |
-| [CodeFlare](https://github.com/xw7qwq/codeflare) | Archives solutions, templates, and submission records | Provides a separate searchable source browser for reference when writing and reviewing solutions |
+| [OJFlare](https://github.com/xw7qwq/oj) | Collects submissions, contest progress, and ratings | Supplies recent submissions and this page's AC contribution calendar |
+| [CodeFlare](https://github.com/xw7qwq/solutions) | Archives solutions, templates, and submission records | Provides a separate searchable source browser that write-ups link to |
 | [.github](https://github.com/xw7qwq/.github) | Organization profile and shared guidelines | Documents how the repositories are maintained |
 
-## How an article reaches you
-
-Articles are Markdown files in nfuwari, with separate Chinese and English content. I preview drafts locally, submit the changes to GitHub, and merge them into `main` after checks pass. GitHub Actions then builds and publishes the site.
+### Publishing
 
 **Markdown → Astro build → GitHub Pages → Alibaba Cloud ESA → your browser**
 
-Astro generates static pages, and Fuwari provides the blog theme. KaTeX renders mathematics; Pagefind builds the search index. GitHub Pages hosts the generated files, while Alibaba Cloud ESA provides edge delivery and HTTPS for `blog.lucius7.cn`. Reading an article loads an already-built page.
+Articles are Markdown files in the blog repository, with Chinese and English written separately. I preview drafts locally, push to GitHub, and merge into `main` after checks pass. GitHub Actions then builds and publishes the site.
 
-The repository's [writing guide](https://github.com/xw7qwq/nfuwari/blob/main/docs/WRITING.md) and [deployment guide](https://github.com/xw7qwq/nfuwari/blob/main/docs/DEPLOYMENT.md) explain the workflow.
+Astro generates static pages, Fuwari provides the theme, KaTeX renders math, and Pagefind builds the search index at build time. GitHub Pages hosts the output, and Alibaba Cloud ESA provides edge delivery and HTTPS for `blog.lucius7.cn`. See the repository's [writing guide](https://github.com/xw7qwq/blog/blob/main/docs/WRITING.md) and [deployment guide](https://github.com/xw7qwq/blog/blob/main/docs/DEPLOYMENT.md) for details.
 
-## How the site chooses Chinese or English
+### Chinese and English
 
-**The URL prefix determines the language, with Chinese as the default.** The site does not automatically choose a language based on your browser or IP address, and it does not remember your previous language selection.
+**The URL prefix sets the language, and Chinese is the default.** The site does not pick a language from your browser or IP address, and it does not remember your last choice.
 
 | Address | What opens |
 | --- | --- |
@@ -70,37 +84,27 @@ The repository's [writing guide](https://github.com/xw7qwq/nfuwari/blob/main/doc
 | [/zh/](/zh/) | Chinese interface, articles, and search results |
 | [/en/](/en/) | English interface, articles, and search results |
 
-The **中文 / EN** buttons in the top navigation choose a destination based on the current page:
+The **中文 / EN** buttons in the top navigation:
 
-- **Home, About, and archive:** open the equivalent page in the other language. For example, `/zh/about/` switches to `/en/about/`.
-- **Articles:** open the corresponding published translation when available; otherwise, open the target language's home page. Articles and translations are written separately.
-- **Pagination and filters:** switching languages returns to the target home or archive page without carrying over page numbers, categories, or tag filters.
+- **Home, About, and archive:** open the same page in the other language. For example, `/zh/about/` switches to `/en/about/`.
+- **Articles:** open the published translation if there is one; otherwise, open the target language's home page. Articles and translations are written separately.
+- **Pagination and filters:** return to the target language's home or archive page, without keeping page numbers, categories, or tag filters.
 
-A language switch fully loads the destination page so that menus, sidebars, and search update together. Opening the root URL again still takes you to Chinese. Bookmark [/en/](/en/) to enter the English site directly. The legacy `/about/` and `/archive/` entry points also redirect to their Chinese counterparts.
+A language switch fully loads the destination page, so menus, sidebars, and search update together. The root URL always opens Chinese; bookmark [/en/](/en/) to go straight to English. The legacy `/about/` and `/archive/` entry points redirect to the Chinese About and archive pages.
 
-## Where the changing information comes from
+### Live data on the page
 
-### Applications and music: MacFlare
+**MacFlare: apps and music.** A native collector on my Mac records the current app and Apple Music activity and sends authenticated updates to a Cloudflare Worker, which stores them in Workers KV. Your browser reads the public [`/api/now`](https://macflare.lucius7.dev/api/now) and [`/api/icons`](https://macflare.lucius7.dev/api/icons) endpoints to show an app icon beside the site title, plus track artwork while music is playing. Hover, focus, or tap an icon to see its name. These are the most recently published snapshots; they disappear when the state expires or the API is unavailable. API and integration docs are at [MacFlare](https://macflare.lucius7.dev/).
 
-A native collector on my Mac records application and Apple Music activity. It sends authenticated updates to a Cloudflare Worker, with state stored in Workers KV. The blog reads the public [`/api/now`](https://macflare.lucius7.dev/api/now) and [`/api/icons`](https://macflare.lucius7.dev/api/icons) endpoints in your browser. An app icon appears beside the site title, along with track artwork when music is playing. Hover, focus, or tap an icon to see its name.
+**OJFlare: recent submissions and AC contributions.** OJFlare sync jobs collect solving records from Codeforces, AtCoder, QOJ, and Nowcoder and publish [`dashboard.json`](https://ojflare.lucius7.dev/data/dashboard.json). The blog uses it in two places:
 
-These are the most recently published activity snapshots. The icons update from the API and disappear when the state expires or becomes unavailable. API and integration documentation is available at [MacFlare](https://macflare.lucius7.dev/).
+- **Recent submissions in the sidebar:** the latest three accepted Codeforces / AtCoder submissions by submission time, linking to the original submission pages. Repeat ACs on the same problem appear separately.
+- **The AC contribution calendar below this page:** the number of problems first accepted each day in UTC+8, based on the collected history. Each problem counts only on its earliest AC date. You can filter by year and platform.
 
-### Recent submissions and AC contributions: OJFlare
+Both share one data request and refresh periodically while the page is visible. Freshness depends on OJFlare's sync and publishing; see its [API documentation](https://github.com/xw7qwq/oj/blob/main/docs/API.md). These public APIs are read only after the page loads, so building and reading articles does not depend on them being online.
 
-OJFlare sync jobs collect solving records from Codeforces, AtCoder, QOJ, and Nowcoder, then publish [`dashboard.json`](https://ojflare.lucius7.dev/data/dashboard.json). The blog presents two views of that data:
-
-- **Recent submissions in the sidebar** show the latest three accepted Codeforces / AtCoder submissions, with direct links to the original submission pages. Repeat ACs on the same problem can appear separately.
-- **The AC contribution calendar below** counts each problem on its earliest recorded AC date in UTC+8, based on the collected history. Each problem counts only once. You can filter by year and platform.
-
-Both widgets share a data request and refresh periodically while the page is visible. Freshness depends on OJFlare's sync and publication schedule; see its [API documentation](https://github.com/xw7qwq/ojflare/blob/main/docs/API.md). The public APIs are read after the page loads, so building and reading articles does not depend on those services being available at that moment.
-
-### From submission records to source code: CodeFlare
-
-[CodeFlare](https://codeflare.lucius7.dev/) organizes code by platform and directory, with search and an online source reader. Its archive tools can use OJFlare's problem, contest, and AC metadata to help organize imports, then supplement submission records and source code from available sources.
-
-Source archives and AC statistics are maintained separately. The archive also includes templates, unfinished code, and unsuccessful attempts, so its file count is not a solved-problem count. I write the blog's explanations myself and use links to connect them with the code archive. The data APIs directly integrated into this site currently come from MacFlare and OJFlare.
+**CodeFlare: source archive.** [CodeFlare](https://codeflare.lucius7.dev/) shows code by platform and directory, with search and an online reader. Its archive tools use OJFlare's problem, contest, and AC metadata to organize imports, then fill in submission records and source code from available sources. The archive also holds templates, unfinished code, and failed attempts, so its file count is not a solved-problem count. I write the blog's solution analyses myself and link to the code here; the only data APIs this site integrates directly are MacFlare and OJFlare.
 
 ## Get in touch
 
-You can find me on [GitHub](https://github.com/theLucius7), [Bilibili](https://space.bilibili.com/1814052279), and [X](https://x.com/theLucius7), or email [i@lucius7.dev](mailto:i@lucius7.dev). For website or project issues, please use the relevant repository's Issues page.
+You can reach me on [GitHub](https://github.com/theLucius7), [Bilibili](https://space.bilibili.com/1814052279), or [X](https://x.com/theLucius7), or by email at [i@lucius7.dev](mailto:i@lucius7.dev). For site or project issues, please open an issue in the relevant repository.
