@@ -103,7 +103,7 @@ Astro 生成静态页面，Fuwari 是主题，KaTeX 渲染公式，Pagefind 在�
 
 两处共用一次数据请求，页面可见时定期刷新；数据有多新取决于 OJFlare 的同步和发布，实现见它的 [API 文档](https://github.com/xw7qwq/oj/blob/main/docs/API.md)。这些公开接口都在页面加载后才读取，所以文章的构建和阅读不依赖接口当时是否在线。
 
-**CodeFlare：源码归档。** [CodeFlare](https://codeflare.lucius7.dev/) 按平台和目录展示代码，支持搜索和在线阅读。归档工具会借助 OJFlare 的题目、比赛和 AC 元数据来整理，再从能获取的来源补充提交信息和源码。仓库里也有模板、没写完的代码和没通过的尝试，所以文件数量不等于过题数。博客里的题解分析由我撰写，通过链接引用这里的代码；本站直接接入的数据 API 只有 MacFlare 和 OJFlare。
+**CodeFlare：源码归档。** 代码放在 [solutions](https://github.com/xw7qwq/solutions) 仓库，[面板的题解页](https://panel.lucius7.dev/oj/code/)按平台和目录展示，支持搜索和在线阅读。归档工具会借助 OJFlare 的题目、比赛和 AC 元数据来整理，再从能获取的来源补充提交信息和源码。仓库里也有模板、没写完的代码和没通过的尝试，所以文件数量不等于过题数。博客里的题解分析由我撰写，通过链接引用这里的代码；本站直接接入的数据 API 只有 MacFlare 和 OJFlare。
 
 ## 联系我
 
