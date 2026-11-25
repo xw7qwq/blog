@@ -103,7 +103,7 @@ A language switch fully loads the destination page, so menus, sidebars, and sear
 
 Both share one data request and refresh periodically while the page is visible. Freshness depends on OJFlare's sync and publishing; see its [API documentation](https://github.com/xw7qwq/oj/blob/main/docs/API.md). These public APIs are read only after the page loads, so building and reading articles does not depend on them being online.
 
-**CodeFlare: source archive.** [CodeFlare](https://codeflare.lucius7.dev/) shows code by platform and directory, with search and an online reader. Its archive tools use OJFlare's problem, contest, and AC metadata to organize imports, then fill in submission records and source code from available sources. The archive also holds templates, unfinished code, and failed attempts, so its file count is not a solved-problem count. I write the blog's solution analyses myself and link to the code here; the only data APIs this site integrates directly are MacFlare and OJFlare.
+**CodeFlare: source archive.** The code lives in the [solutions](https://github.com/xw7qwq/solutions) repository, and the [panel's solutions page](https://panel.lucius7.dev/oj/code/) shows it by platform and directory, with search and an online reader. Its archive tools use OJFlare's problem, contest, and AC metadata to organize imports, then fill in submission records and source code from available sources. The archive also holds templates, unfinished code, and failed attempts, so its file count is not a solved-problem count. I write the blog's solution analyses myself and link to the code here; the only data APIs this site integrates directly are MacFlare and OJFlare.
 
 ## Get in touch
 

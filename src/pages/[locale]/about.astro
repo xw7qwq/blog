@@ -7,6 +7,7 @@ import { type Locale, locales } from "@i18n/locales";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { localeUrl } from "@utils/url-utils";
+import { SITES } from "@xw7/ui/nav";
 import { ojFlareConfig } from "@/config";
 
 export function getStaticPaths() {
@@ -39,7 +40,7 @@ const alternates = locales.map((language) => ({
         <section class="card-base relative mt-4 min-w-0 p-4 sm:p-6" aria-labelledby="ac-contributions-heading">
             <div class="mb-4 flex items-center justify-between gap-3">
                 <h2 id="ac-contributions-heading" class="text-xl font-bold text-90">{locale === "en" ? "AC Contributions" : "AC 贡献图"}</h2>
-                <a href={ojFlareConfig.baseUrl} target="_blank" rel="noopener noreferrer" class="text-sm text-[var(--primary)] hover:underline" aria-label={locale === "en" ? "View OJFlare" : "查看 OJFlare"}>OJFlare ↗</a>
+                <a href={`${SITES.panel}oj/`} target="_blank" rel="noopener noreferrer" class="text-sm text-[var(--primary)] hover:underline" aria-label={locale === "en" ? "View all practice records on the panel" : "到面板查看完整刷题记录"}>{locale === "en" ? "All records ↗" : "完整记录 ↗"}</a>
             </div>
             <OJContributions client:load locale={locale} baseUrl={ojFlareConfig.baseUrl} />
         </section>
