@@ -1,5 +1,5 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.5.15/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.6.9/schema.json",
 	"vcs": {
 		"enabled": false,
 		"clientKind": "git",
@@ -10,6 +10,7 @@
 		"includes": [
 			"**",
 			"!**/src/**/*.css",
+			"!**/src/content/**/*.md",
 			"!**/src/public/**/*",
 			"!**/dist/**/*",
 			"!**/node_modules/**/*"
