@@ -45,8 +45,8 @@ let links: NavBarLink[] = navBarConfig.links.map(
             </div>
         </a>
         {macFlareConfig.enable && <MacFlare client:load locale={locale} baseUrl={macFlareConfig.baseUrl} />}
-        </div>
         <a href={SITES.panel} class="btn-plain scale-animation rounded-lg h-11 px-3 font-bold shrink-0">{locale === "en" ? "Panel" : "面板"}</a>
+        </div>
         <div class="hidden lg:flex shrink-0">
             {links.map((l) => {
                 return <a aria-label={l.name} href={l.external ? l.url : localeUrl(locale, l.url)} target={l.external ? "_blank" : null}
